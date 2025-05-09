@@ -1,13 +1,14 @@
+<h1><%= @list.name %></h1>
+
 <h2>Bookmarks</h2>
-<% if @list.bookmarks.any? %>
-  <ul>
-    <% @list.bookmarks.each do |bookmark| %>
-      <li>
-        <strong><%= bookmark.movie.title %>:</strong>
-        <%= bookmark.comment %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No bookmarks yet.</p>
-<% end %>
+<ul>
+  <% @list.bookmarks.each do |bookmark| %>
+    <li>
+      <strong><%= bookmark.movie.title %>:</strong>
+      <%= bookmark.comment %>
+      <%= link_to "Delete", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Add a bookmark", new_list_bookmark_path(@list) %>
